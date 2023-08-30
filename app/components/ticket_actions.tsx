@@ -39,7 +39,7 @@ export default function TicketActions(props: {ticketId: string}) {
   }, [initializeFirebase]);
 
   return (
-    <div>
+    <div className="p-3">
       Ticket ID: {props.ticketId}
       {!firestoreDb &&(<span>Loading Firestore DB</span>)}
       {firestoreDb && (
@@ -50,9 +50,10 @@ export default function TicketActions(props: {ticketId: string}) {
             <div>Paid: {ticketInfo.paid ? "Paid" : "Not paid"}</div>
             <div>Quantity: {ticketInfo.quantity || "0"}</div>
             <div>Contact: {ticketInfo.phone} {ticketInfo.email}</div>
-            <div>Status: {ticketInfo.checkedIn ? "Checked In" : "Checked Out"}</div>
-            {!ticketInfo.checkedIn && (<div><button onClick={checkInTicket}>Check In {ticketInfo.fullname}</button></div>)}
-            {ticketInfo.checkedIn && (<div><button onClick={checkOutTicket}>Check Out {ticketInfo.fullname}</button></div>)}
+            {ticketInfo.checkedIn && (<div className="text-green-800 text-lg">Checked In</div>)}
+            {!ticketInfo.checkedIn && (<div className="text-red-800 text-lg">Checked Out</div>)}
+            {!ticketInfo.checkedIn && (<div><button className="bg-orange-800 text-white px-3 py-1 rounded-md" onClick={checkInTicket}>Check In {ticketInfo.fullname}</button></div>)}
+            {ticketInfo.checkedIn && (<div><button className="bg-orange-800 text-white px-3 py-1 rounded-md" onClick={checkOutTicket}>Check Out {ticketInfo.fullname}</button></div>)}
           </div>)}
         </div>)}
     </div>
